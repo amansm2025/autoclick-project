@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "autoclick": "node autoclick.js"
+    "autoclick": "node autoclick.js",
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "express": "^4.18.0",

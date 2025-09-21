@@ -1,27 +1,22 @@
 const express = require('express');
-const { exec } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
-const port = 3001;
 
 app.use(express.json());
-app.use(express.static('.'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'function.html'));
+    const htmlPath = path.join(__dirname, 'function.html');
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    res.send(html);
 });
 
 app.post('/trigger-autoclick', (req, res) => {
-    exec('npm run autoclick', { cwd: __dirname }, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error: ${error}`);
-            return res.status(500).json({ success: false, error: error.message });
-        }
-        res.json({ success: true, output: stdout });
+    res.json({ 
+        success: false, 
+        error: 'Puppeteer cannot run on Vercel. Run locally: node autoclick.js' 
     });
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+module.exports = app;
