@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Autoclick Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px 0; }
+        .links { margin: 20px 0; }
+        .link { display: block; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Autoclick Project</h1>
+        <p>Click the links below to visit the blog pages:</p>
+        
+        <div class="links">
+            <a href="https://amantheprogrammer.blogspot.com/" target="_blank" class="link">Main Blog</a>
+            <a href="https://amantheprogrammer.blogspot.com/2025/05/selection-sort-code-algorithm.html" target="_blank" class="link">Selection Sort Algorithm</a>
+        </div>
+        
+        <button onclick="openAllLinks()">Open All Links</button>
+        
+        <p><strong>Note:</strong> For automated clicking, run locally: <code>node autoclick.js</code></p>
+    </div>
+
+    <script>
+        function openAllLinks() {
+            const links = [
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/2025/05/selection-sort-code-algorithm.html'
+            ];
+            
+            links.forEach(link => {
+                window.open(link, '_blank');
+            });
+        }
+    </script>
+</body>
+</html>
