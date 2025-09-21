@@ -29,11 +29,52 @@
         function openAllLinks() {
             const links = [
                 'https://amantheprogrammer.blogspot.com/',
-                'https://amantheprogrammer.blogspot.com/2025/05/selection-sort-code-algorithm.html'
+                'https://amantheprogrammer.blogspot.com/2025/05/selection-sort-code-algorithm.html',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/',
+                'https://amantheprogrammer.blogspot.com/'
             ];
             
-            links.forEach(link => {
-                window.open(link, '_blank');
+            // Create iframe method to bypass restrictions
+            links.forEach((link, index) => {
+                setTimeout(() => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = link;
+                    iframe.style.display = 'none';
+                    document.body.appendChild(iframe);
+                    
+                    iframe.onload = () => {
+                        try {
+                            // Multiple click attempts
+                            iframe.contentDocument.body.click();
+                            iframe.contentDocument.documentElement.click();
+                            
+                            // Simulate user interaction
+                            const event = new MouseEvent('click', {
+                                bubbles: true,
+                                cancelable: true,
+                                view: iframe.contentWindow
+                            });
+                            iframe.contentDocument.body.dispatchEvent(event);
+                            
+                            // Also open in new window
+                            window.open(link, '_blank');
+                            
+                        } catch(e) {
+                            // Fallback: just open the window
+                            window.open(link, '_blank');
+                        }
+                        
+                        // Remove iframe after 3 seconds
+                        setTimeout(() => {
+                            document.body.removeChild(iframe);
+                        }, 3000);
+                    };
+                }, index * 1000);
             });
         }
     </script>
